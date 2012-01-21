@@ -125,11 +125,11 @@ Cls2projMatA=Extr_PCA_Features(xraw,TrainIndclass2)
 
 #using only principal components (normalized between 0 and 1)
 Nfea=2
-a=Cls1projMat[:,1]
+a=Cls1projMatA[:,1]
 a=mat(a)
 a= (  a-float(a.min(1))  )/(  float(a.max(1))  - float(a.min(1))  )
 
-b=Cls1projMat[:,1]
+b=Cls1projMatA[:,1]
 b=mat(b)
 b= (  b-float(b.min(1))  )/(  float(b.max(1))  -  float(b.min(1))  )
 

@@ -99,25 +99,30 @@ Ngenes=xraw.shape[0]
 Ns=xraw.shape[1]
 
 N_class1=len(primaryTIndexAll)
-divide=random.sample(primaryTIndexAll,npta)
+#divide=random.sample(primaryTIndexAll,npta)
 
 #separate positve and negative sets into train, validation, test sets
-N_class1Train=int(round(N_class1*0.08))
-N_class1Val=int(round(N_class1*0.32))
-N_class1Test=int(round(N_class1*0.60))
-TrainIndclass1= divide[0:N_class1Train]
-ValIndclass1= divide[N_class1Train:N_class1Train+N_class1Val]
-TestIndclass1= divide[N_class1Train+N_class1Val:N_class1Train+N_class1Val+N_class1Test]
+
+TrainIndclass1=primaryTIndexAll[0:70] #2/3 of all primary tumor
+ValIndclass1= primaryTIndexAll[70:105]
+TestIndclass1=primaryTIndexAll[70:105]
+N_class1Train= size(TrainIndclass1)
+N_class1Val=size(ValIndclass1)
+N_class1Test=size(TestIndclass1)
+
+
 
 N_class2=len(nIndex)
 divide=random.sample(nIndex,nni)
 
-N_class2Train=int(round(N_class2*0.08))
-N_class2Val=int(round(N_class2*0.32))
-N_class2Test=int(round(N_class2*0.60))
-TrainIndclass2= divide[0:N_class2Train]
-ValIndclass2= divide[N_class2Train:N_class2Train+N_class2Val]
-TestIndclass2= divide[N_class2Train+N_class2Val:N_class2Train+N_class2Val+N_class2Test]
+TrainIndclass2= nIndex[0:49] # 2/3 of the normal data 
+ValIndclass2= nIndex[49:76]
+TestIndclass2= nIndex[49:76]
+
+N_class2Train=size(TrainIndclass2)
+N_class2Val=size(ValIndclass2)
+N_class2Test=size(TestIndclass2)
+
 
 #POD
 Cls1projMatA=Extr_PCA_Features(xraw,TrainIndclass1)
@@ -129,7 +134,7 @@ a=Cls1projMatA[:,1]
 a=mat(a)
 a= (  a-float(a.min(1))  )/(  float(a.max(1))  - float(a.min(1))  )
 
-b=Cls1projMatA[:,1]
+b=Cls2projMatA[:,1]
 b=mat(b)
 b= (  b-float(b.min(1))  )/(  float(b.max(1))  -  float(b.min(1))  )
 
